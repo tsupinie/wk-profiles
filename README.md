@@ -23,21 +23,22 @@ temp, dewp, pres = prof(hght) # Get profiles of temperature (K), dewpoint (K), a
 ```
 
 These parameters are a bit unintuitive, and it can be difficult to find two profiles that hold a quantity like CAPE constant. So for that, you can use `find_wk_parameters` to find parameters for a profile with specific values for various quantities. The arguments to `find_wk_parameters` are as follows:
-| Argument | Description                                      |
-| -------- | ------------------------------------------------ |
-| tsfc     | Requested surface temperature (K)                |
-| psfc     | Requested surface pressure (Pa)                  |
-| sbcape   | Requested CAPE from the surface parcel (J/kg)    |
-| sblcl    | Requested LCL height from the surface parcel (m) |
-| ztrop    | Requested height for the tropopause (m)          |
+| Argument | Description                                      | Default value |
+| -------- | ------------------------------------------------ | ------------- |
+| tsfc     | Requested surface temperature (K)                | 293           |
+| psfc     | Requested surface pressure (Pa)                  | 97000         |
+| sbcape   | Requested CAPE from the surface parcel (J/kg)    | 1000          |
+| sblcl    | Requested LCL height from the surface parcel (m) | 500           |
+| ztrop    | Requested height for the tropopause (m)          | 12000         |
 
 `find_wk_parameters` returns a dictionary of parameters you can pass straight to `wk_sounding`. For example:
 
 ```python
-params = find_wk_params(293., 97000., 1000., 500., 12000.) # Find the WK82 profile parameters corresponding to
-                                                           # a surface temperature of 293 K, a surface pressure
-                                                           # of 970 hPa, an SBCAPE of 1000 J/kg, an SBLCL height 
-                                                           # of 500 m, and a tropopause height of 12 km.
+# Find the WK82 profile parameters for a profile with a surface temperature of 293 K, a surface
+#   pressure of 970 mb, an SBCAPE of 1000 J/kg, an SBLCL of 500 m, and a tropopause height of
+#   12 km.
+params = find_wk_params(tsfc=293., psfc=97000., sbcape=1000., sblcl=500., ztrop=12000.)
+
 prof = wk_sounding(**params) # Create the WK82 profile object with those parameters
 hght = np.arange(0, 20000, 500) # Generate a height array in meters
 temp, dewp, pres = prof(hght) # Get profiles of temperature (K), dewpoint (K), and pressure (Pa)
