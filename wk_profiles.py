@@ -109,7 +109,7 @@ def compute_opt_params(x):
     return temp[0].m, pres[0].m, cape.m, lclhght
     
 
-def find_wk_params(tsfc, psfc, sbcape, sblcl, ztrop): 
+def find_wk_params(tsfc=293., psfc=97000., sbcape=1000., sblcl=500., ztrop=12000.): 
     """
     Find parameters for Weisman-Klemp profiles based on some more intuitive values.
 
@@ -124,7 +124,7 @@ def find_wk_params(tsfc, psfc, sbcape, sblcl, ztrop):
     A dictionary containing the values for the parameters for the Weisman-Klemp profiles
 
     Examples
-    >>> params = find_wk_params(293., 97000., 1000., 500., 12000.)
+    >>> params = find_wk_params(tsfc=293., psfc=97000., sbcape=1000., sblcl=500., ztrop=12000.)
     >>> wk_prof = wk_sounding(**params)
     >>> hght = np.arange(0, 20000, 500)
     >>> temp, dewp, pres = wk_prof(hght)
