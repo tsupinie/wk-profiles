@@ -6,7 +6,7 @@ Create Weisman-Klemp (WK82) profiles for initializing idealized simulations of s
 * Numpy/Scipy
 
 ### Usage
-There are two functions: `wk_sounding` and `find_wk_parameters`. `wk_sounding` is the main function for generating profiles. It takes the parameters defined in the WK82 paper:
+There are two functions: `wk_sounding` and `find_wk_params`. `wk_sounding` is the main function for generating profiles. It takes the parameters defined in the WK82 paper:
 | Parameter | Description                                 | Default value |
 | --------- | --------------------------------------------| ------------- |
 | th_trop   | Potential temperature at the tropopause (K) | 343           |
@@ -22,7 +22,7 @@ hght = np.arange(0, 20000, 500) # Generate a height array in meters
 temp, dewp, pres = prof(hght) # Get profiles of temperature (K), dewpoint (K), and pressure (Pa)
 ```
 
-These parameters are a bit unintuitive, and it can be difficult to find two profiles that hold a quantity like CAPE constant. So for that, you can use `find_wk_parameters` to find parameters for a profile with specific values for various quantities. The arguments to `find_wk_parameters` are as follows:
+These parameters are a bit unintuitive, and it can be difficult to find two profiles that hold a quantity like CAPE constant. So for that, you can use `find_wk_params` to find parameters for a profile with specific values for various quantities. The arguments to `find_wk_params` are as follows:
 | Argument | Description                                      | Default value |
 | -------- | ------------------------------------------------ | ------------- |
 | tsfc     | Requested surface temperature (K)                | 293           |
@@ -31,7 +31,7 @@ These parameters are a bit unintuitive, and it can be difficult to find two prof
 | sblcl    | Requested LCL height from the surface parcel (m) | 500           |
 | ztrop    | Requested height for the tropopause (m)          | 12000         |
 
-`find_wk_parameters` returns a dictionary of parameters you can pass straight to `wk_sounding`. For example:
+`find_wk_params` returns a dictionary of parameters you can pass straight to `wk_sounding`. For example:
 
 ```python
 # Find the WK82 profile parameters for a profile with a surface temperature of 293 K, a surface
