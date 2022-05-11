@@ -6,7 +6,7 @@ Create Weisman-Klemp (WK82) profiles for initializing idealized simulations of s
 * Numpy/Scipy
 
 ### Usage
-There are two functions: `wk_sounding` and `find_wk_parameters`. `wk_sounding` takes the parameters defined in the WK82 paper:
+There are two functions: `wk_sounding` and `find_wk_parameters`. `wk_sounding` is the main function for generating profiles. It takes the parameters defined in the WK82 paper:
 | Parameter | Description                                 | Default value |
 | --------- | --------------------------------------------| ------------- |
 | th_trop   | Potential temperature at the tropopause (K) | 343           |
@@ -38,7 +38,7 @@ params = find_wk_params(293., 97000., 1000., 500., 12000.) # Find the WK82 profi
                                                            # a surface temperature of 293 K, a surface pressure
                                                            # of 970 hPa, an SBCAPE of 1000 J/kg, an SBLCL height 
                                                            # of 500 m, and a tropopause height of 12 km.
-wk_prof = wk_sounding(**params) # Create the WK82 profile object with those parameters
+prof = wk_sounding(**params) # Create the WK82 profile object with those parameters
 hght = np.arange(0, 20000, 500) # Generate a height array in meters
-temp, dewp, pres = wk_prof(hght) # Get profiles of temperature (K), dewpoint (K), and pressure (Pa)
+temp, dewp, pres = prof(hght) # Get profiles of temperature (K), dewpoint (K), and pressure (Pa)
 ```
